@@ -4,7 +4,7 @@
   "description": "NONE",
   "scripts": {
     "h-start": "node build/src/index.js",
-    "start": "ts-node src/index.ts"
+    "start": "tsc && node build/src/index.js"
   },
   "author": "Mateoox600",
   "license": "ISC",

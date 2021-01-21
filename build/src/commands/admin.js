@@ -19,4 +19,9 @@ module.exports = new index_1.Command('admin', ['ad'], true, 'Admin things but on
             index_2.bot.changeGuildPrefix(e.guild.id, config_json_1.prefix);
         else
             index_2.bot.changeGuildPrefix(e.guild.id, args[1]);
+    else if (args[0] === 'user' || args[0] === 'u')
+        if (args[1] === 'level' || args[1] === 'lvl')
+            index_2.users.data.get(args[2]).level = Number[3];
+        else if (args[1] === 'xp')
+            index_2.users.data.get(args[2]).xp = Number[3];
 });
