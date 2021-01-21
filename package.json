@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "NONE",
   "scripts": {
-    "start": "ts-node src/index.ts"
+    "start": "node build/src/index.js",
+    "test": "ts-node src/index.ts"
   },
   "author": "Mateoox600",
   "license": "ISC",
