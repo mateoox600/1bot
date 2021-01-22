@@ -5,7 +5,7 @@
   "scripts": {
     "h-start": "node build/src/index.js",
     "start": "tsc && node build/src/index.js",
-    "heroku": "tsc && git add . && git commit -am \"testing and new level system\" && git push heroku master"
+    "heroku": "tsc && git add . && git commit -am \"adding reward to leveling\" && git push heroku master"
   },
   "author": "Mateoox600",
   "license": "ISC",
