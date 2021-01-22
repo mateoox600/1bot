@@ -10,6 +10,10 @@ module.exports = new index_1.Command('level', ['lvl'], true, 'Show your level', 
         e.channel.send(new discord_js_1.MessageEmbed().addField('Level', `${user.level} (Xp: ${user.xp}/${(user.level + 1) * 100})`).setAuthor(e.author.username, e.author.displayAvatarURL()));
     else {
         if (args[0] === 'reward-add' || args[0] === 'r') {
+            if (e.member.id !== e.guild.ownerID || e.member.id !== config.owner.id) {
+                e.reply('you don\'t have the permission to do that');
+                return;
+            }
             if (args.length >= 4) {
                 const level = Number(args[1]);
                 const role = args[2];
@@ -34,6 +38,10 @@ module.exports = new index_1.Command('level', ['lvl'], true, 'Show your level', 
             }
         }
         else if (args[0] === 'reward-rmv' || args[0] === 'r-rmv') {
+            if (e.member.id !== e.guild.ownerID || e.member.id !== config.owner.id) {
+                e.reply('you don\'t have the permission to do that');
+                return;
+            }
             if (args.length >= 2) {
                 const id = Number(args[1]);
                 if (isNaN(id)) {
@@ -52,6 +60,7 @@ module.exports = new index_1.Command('level', ['lvl'], true, 'Show your level', 
             index_2.guilds.data.get(e.guild.id).levels.rewards.forEach((v, idx) => {
                 embed.addField(idx, `level: ${v.level} \nmessage: ${v.message} \nrole: ${e.guild.roles.cache.get(v.role)}`);
             });
+            e.channel.send(embed);
         }
         else {
             e.reply('use `;level` to see your level' + (e.member.id === e.guild.ownerID || e.member.id === config.owner.id ? ' and `;level <rewards|reward-add|reward-rmv>` for admin' : ' !'));
