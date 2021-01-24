@@ -1,6 +1,6 @@
 import { GuildMember } from 'discord.js';
 import { Event } from '../lib/index';
-import { users } from '../index';
+import { guilds, users } from '../index';
 
 module.exports = new Event('guildMemberAdd', (m: GuildMember) => {
     if(!users.data.has(m.id)) users.data.set(m.id, {
@@ -8,4 +8,10 @@ module.exports = new Event('guildMemberAdd', (m: GuildMember) => {
         level: 0,
         xp: 0
     })
+    if(!(m.id in guilds.data.get(m.guild.id).members)) {
+        guilds.data.get(m.guild.id).members[m.id] = {
+            warns: [],
+            permissions: []
+        };
+    }
 });

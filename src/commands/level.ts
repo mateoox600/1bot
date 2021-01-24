@@ -3,7 +3,7 @@ import { Command } from '../lib/index';
 import { users, guilds } from '../index';
 import * as config from '../../config.json';
 
-module.exports = new Command('level', ['lvl'], true, 'Show your level', (e: Message, args: string[]) => {
+module.exports = new Command('level', ['lvl'], false, 'Show your level', (e: Message, args: string[]) => {
     var user = users.data.get(e.author.id);
     if(args.length <= 0) e.channel.send(new MessageEmbed().addField('Level', `${user.level} (Xp: ${user.xp}/${(user.level+1)*100})`).setAuthor(e.author.username, e.author.displayAvatarURL()));
     else {
@@ -25,11 +25,11 @@ module.exports = new Command('level', ['lvl'], true, 'Show your level', (e: Mess
                         const role = args[3];
                         const message = args.slice(4).join(' ');
                         if(isNaN(level)) {
-                            e.reply('use `;level reward add <level> <roleId> <message>` with a valid number');
+                            e.reply('use ";level reward add <level> <roleId> <message>" with a valid number');
                             return;
                         }
                         if(!e.guild.roles.cache.has(role)) {
-                            e.reply('use `;level reward add <level> <roleId> <message>` with a valid role id');
+                            e.reply('use ";level reward add <level> <roleId> <message>" with a valid role id');
                             return;
                         }
                         guilds.data.get(e.guild.id).levels.rewards.push({
@@ -39,7 +39,7 @@ module.exports = new Command('level', ['lvl'], true, 'Show your level', (e: Mess
                         });
                         e.reply('you created a reward for leveling up to level ' + level + ' with a role reward of ' + e.guild.roles.cache.get(role).name + ' with a message of "' + message + '"');
                     }else {
-                        e.reply('use `;level reward add <level> <roleId> <message>` to create a reward for level');
+                        e.reply('use ";level reward add <level> <roleId> <message>" to create a reward for level');
                     }
                 }else if(args[1] === 'remove' || args[1] === '-') {
                     if(e.member.id !== e.guild.ownerID || e.member.id !== config.owner.id) {
@@ -49,13 +49,13 @@ module.exports = new Command('level', ['lvl'], true, 'Show your level', (e: Mess
                     if(args.length >= 3) {
                         const id = Number(args[2]);
                         if(isNaN(id)) {
-                            e.reply('use `;level reward remove <reward-id>`');
+                            e.reply('use ";level reward remove <reward-id>"');
                             return;
                         }
                         guilds.data.get(e.guild.id).levels.rewards.splice(id, 1);
                         e.reply('you deleted the reward with id ' + id);
                     }else {
-                        e.reply('use `;level reward remove <reward-id>`');
+                        e.reply('use ";level reward remove <reward-id>"');
                     }
                 }
             }
