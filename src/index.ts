@@ -1,6 +1,6 @@
 import { Bot, DataManager, DataTemplate } from './lib/index';
 import * as config from '../config.json';
-import { GuildMember, Snowflake, TextChannel } from 'discord.js';
+import { Snowflake } from 'discord.js';
 
 export const bot = new Bot(config.prefix, config.owner.id);
 
