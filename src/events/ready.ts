@@ -12,14 +12,14 @@ module.exports = new Event('ready', () => {
         })
         g.members.cache.forEach((m) => {
             if(!users.data.has(m.id)) users.data.set(m.id, {
-                id: m.id,
-                level: 0,
-                xp: 0
+                id: m.id
             })
             if(!(m.id in guilds.data.get(g.id).members)) {
                 guilds.data.get(g.id).members[m.id] = {
                     warns: [],
-                    permissions: []
+                    permissions: [],
+                    level: 0,
+                    xp: 0
                 };
             }
         })

@@ -3,13 +3,13 @@ import { Event } from '../lib/index';
 import { users, guilds } from '../index';
 
 module.exports = new Event('message', (msg: Message) => {
-    const user = users.data.get(msg.author.id);
+    var guild = guilds.data.get(msg.guild.id);
+    const user = guild.members[msg.author.id];
+    if(user == undefined) return;
     user.xp++;
     if(user.xp >= (user.level+1)*100) {
         user.xp = 0;
         user.level++;
-
-        var guild = guilds.data.get(msg.guild.id);
 
         msg.channel.send('You leveled up ! You are now level ' + user.level);
         guild.levels.rewards.forEach((r) => {

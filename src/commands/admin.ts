@@ -1,6 +1,6 @@
 import { Message } from 'discord.js';
 import { Command } from '../lib/index';
-import { bot, users } from '../index';
+import { bot, guilds, users } from '../index';
 import { prefix } from '../../config.json';
 
 module.exports = new Command('admin', ['ad'], true, 'Admin things but only for bot owner', (e: Message, args: string[]) => {
@@ -15,6 +15,6 @@ module.exports = new Command('admin', ['ad'], true, 'Admin things but only for b
         if(args[1] === '"reset"') bot.changeGuildPrefix(e.guild.id, prefix);
         else bot.changeGuildPrefix(e.guild.id, args[1]);
     else if(args[0] === 'user' || args[0] === 'u')
-        if(args[1] === 'level' || args[1] === 'lvl') users.data.get(args[2]).level = Number[3];
-        else if(args[1] === 'xp')users.data.get(args[2]).xp = Number[3];
+        if(args[1] === 'level' || args[1] === 'lvl') guilds.data.get(e.guild.id).members[args[2]].level = Number[3];
+        else if(args[1] === 'xp') guilds.data.get(e.guild.id).members[args[2]].xp = Number[3];
 });

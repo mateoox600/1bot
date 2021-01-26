@@ -5,8 +5,6 @@ import { Snowflake } from 'discord.js';
 export const bot = new Bot(config.prefix, config.owner.id);
 
 export interface User extends DataTemplate<Snowflake> {
-    level: number,
-    xp: number
 }
 export const users = new DataManager<Snowflake, User>('users')
 
@@ -15,7 +13,9 @@ export interface GuildUser {
         message: string,
         giver: Snowflake
     }[],
-    permissions: string[]
+    permissions: string[],
+    level: number,
+    xp: number
 }
 export interface Guild extends DataTemplate<Snowflake> {
     levels: {

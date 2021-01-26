@@ -4,14 +4,14 @@ import { guilds, users } from '../index';
 
 module.exports = new Event('guildMemberAdd', (m: GuildMember) => {
     if(!users.data.has(m.id)) users.data.set(m.id, {
-        id: m.id,
-        level: 0,
-        xp: 0
+        id: m.id
     })
     if(!(m.id in guilds.data.get(m.guild.id).members)) {
         guilds.data.get(m.guild.id).members[m.id] = {
             warns: [],
-            permissions: []
+            permissions: [],
+            level: 0,
+            xp: 0
         };
     }
 });

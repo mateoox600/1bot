@@ -4,7 +4,7 @@ import { users, guilds } from '../index';
 import * as config from '../../config.json';
 
 module.exports = new Command('level', ['lvl'], false, 'Show your level', (e: Message, args: string[]) => {
-    var user = users.data.get(e.author.id);
+    var user = guilds.data.get(e.guild.id).members[e.author.id];
     if(args.length <= 0) e.channel.send(new MessageEmbed().addField('Level', `${user.level} (Xp: ${user.xp}/${(user.level+1)*100})`).setAuthor(e.author.username, e.author.displayAvatarURL()));
     else {
         if(args[0] === 'reward' || args[0] === 'r') {

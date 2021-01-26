@@ -12,14 +12,14 @@ module.exports = new Event('guildCreate', (g: Guild) => {
     });
     g.members.cache.forEach((user) => {
         if(!users.data.has(user.id)) users.data.set(user.id, {
-            id: user.id,
-            level: 0,
-            xp: 0
+            id: user.id
         })
         if(!(user.id in guilds.data.get(g.id).members)) {
             guilds.data.get(g.id).members[user.id] = {
                 warns: [],
-                permissions: []
+                permissions: [],
+                level: 0,
+                xp: 0
             };
         }
     });
