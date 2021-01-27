@@ -1,6 +1,6 @@
 import { Message } from 'discord.js';
 import { Command } from '../lib/index';
-import { bot, guilds, users } from '../index';
+import { bot, guilds } from '../index';
 import { prefix } from '../../config.json';
 
 module.exports = new Command('admin', ['ad'], true, 'Admin things but only for bot owner', (e: Message, args: string[]) => {

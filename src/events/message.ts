@@ -1,6 +1,6 @@
 import { Message } from 'discord.js';
 import { Event } from '../lib/index';
-import { users, guilds } from '../index';
+import { guilds } from '../index';
 
 module.exports = new Event('message', (msg: Message) => {
     var guild = guilds.data.get(msg.guild.id);

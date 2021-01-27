@@ -1,6 +1,6 @@
 import { Bot, DataManager, DataTemplate } from './lib/index';
 import * as config from '../config.json';
-import { Snowflake } from 'discord.js';
+import { GuildMember, Snowflake } from 'discord.js';
 
 export const bot = new Bot(config.prefix, config.owner.id);
 
@@ -30,6 +30,10 @@ export interface Guild extends DataTemplate<Snowflake> {
     }
 }
 export const guilds = new DataManager<Snowflake, Guild>('guilds');
+
+export function hasPermission(m: GuildMember, permission: string) {
+    return guilds.data.get(m.guild.id).members[m.id].permissions.includes(permission) || m.guild.ownerID === m.id || m.id === config.owner.id
+}
 
 bot.loadCommandsInFolder(`${__dirname}/commands/`);
 bot.loadEventsInFolder(`${__dirname}/events/`);

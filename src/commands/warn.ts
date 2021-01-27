@@ -1,6 +1,5 @@
 import { MessageEmbed } from "discord.js";
-import { guilds } from "../index";
-import * as config from '../../config.json';
+import { guilds, hasPermission } from "../index";
 import { Command } from "../lib/index";
 
 module.exports = new Command('warn', ['warns'], false, 'Warn user', (e, args) => {
@@ -12,7 +11,7 @@ module.exports = new Command('warn', ['warns'], false, 'Warn user', (e, args) =>
         if(embed.fields.length == 0) embed.setDescription('No warn');
         e.channel.send(embed);
     }else if(args.length >= 2 && e.mentions.members.size >= 1) {
-        if(guilds.data.get(e.guild.id).members[e.member.id].permissions.includes('WARN') || e.guild.ownerID === e.member.id || e.member.id === config.owner.id) {
+        if(hasPermission(e.member, 'WARN')) {
             const warn = {
                 giver: e.member.id,
                 message: args.slice(1).join(' ')

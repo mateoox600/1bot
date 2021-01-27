@@ -1,6 +1,6 @@
 import { Message, MessageEmbed } from 'discord.js';
 import { Command } from '../lib/index';
-import { users, guilds } from '../index';
+import { guilds } from '../index';
 import * as config from '../../config.json';
 
 module.exports = new Command('level', ['lvl'], false, 'Show your level', (e: Message, args: string[]) => {
