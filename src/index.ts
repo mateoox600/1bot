@@ -8,12 +8,17 @@ export interface User extends DataTemplate<Snowflake> {
 }
 export const users = new DataManager<Snowflake, User>('users')
 
+export enum Permissions {
+    ALL,
+    WARN,
+    PERMISSION_MANAGE
+}
 export interface GuildUser {
     warns: {
         message: string,
         giver: Snowflake
     }[],
-    permissions: string[],
+    permissions: Permissions[],
     level: number,
     xp: number
 }
@@ -31,8 +36,8 @@ export interface Guild extends DataTemplate<Snowflake> {
 }
 export const guilds = new DataManager<Snowflake, Guild>('guilds');
 
-export function hasPermission(m: GuildMember, permission: string) {
-    return guilds.data.get(m.guild.id).members[m.id].permissions.includes(permission) || m.guild.ownerID === m.id || m.id === config.owner.id
+export function hasPermission(m: GuildMember, permission: Permissions) {
+    return guilds.data.get(m.guild.id).members[m.id].permissions.includes(permission) || m.guild.ownerID === m.id || m.id === config.owner.id || guilds.data.get(m.guild.id).members[m.id].permissions.includes(Permissions.ALL);
 }
 
 bot.loadCommandsInFolder(`${__dirname}/commands/`);
